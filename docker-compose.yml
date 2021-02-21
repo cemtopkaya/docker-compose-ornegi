@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  web-musteri:
+    build:
+      context: ./portal-musteri
+      dockerfile: web.dockerfile
+    networks:
+      - extranet-agi
+
+  web-satici:
+    build:
+      context: ./portal-satici
+      dockerfile: web.dockerfile
+    networks:
+      - extranet-agi
+
+  db-musteri:
+    image: mongo
+    networks:
+      - intranet-agi
+      - extranet-agi
+
+networks:
+  intranet-agi:
+    driver: bridge
+  extranet-agi:
+    driver: bridge
